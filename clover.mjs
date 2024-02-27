@@ -23,7 +23,7 @@ const anioFinal = fechaHoraFinal.slice(4,8);
 
 const startTime = performance.now(); // conteo de tiempo del proceso
 const browser = await puppeteer.launch({ 
-    headless: false,
+    headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   defaultViewport: null,
   ignoreHTTPSErrors: true,

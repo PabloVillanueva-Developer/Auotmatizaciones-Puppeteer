@@ -9,8 +9,8 @@ const directorioBaseUsuario = os.homedir();
 
 
 // TOTEAT
-const userToteat = ""
-const passwordToteat = ""
+const userToteat = "pvillanueva@grupojaka.com"
+const passwordToteat = "pvillanueva1234"
 const carpetaOrigen = join(directorioBaseUsuario, 'Downloads'); // Si en PC local de cliente falla, establecer ruta absoluta.
 const carpetaDestinoConsolidadoVentas = join(__dirname, 'Carpeta Destino', 'Descargas Consolidado Ventas');
 const carpetaDestinoDesperdicios = join(__dirname, 'Carpeta Destino', 'Descargas Inventario - Desperdicios');
@@ -60,21 +60,21 @@ export const carpetaDestinoPeYA = 'C:/Users/PVillanueva/Desktop/Proyectos en Pro
 export const localesPeYA = ['CONNECTORS S.A.', "GEA1 S.A.", "Gastronomica San Joaquin SA", "LEMON FLOWERS SA", "EFEDOS SA", "THELONIOUS MONK S.A.", "Chai Tea SA", "OMAKASE SA", "PICHIN LIGHT"]
 export const fechaInicioPeYA = process.argv[2];
 export const fechaFinalPeYA = process.argv[3];
-export const userPeYA = ""
-export const passwordPeYA = ""
+export const userPeYA = "pvillanueva@grupojaka.com"
+export const passwordPeYA = "Pablo2019"
 
 
 // CLOVER
 export const fechaInicioClover = process.argv[2];
 export const fechaFinalClover = process.argv[3];
-export const userClover = ''
-export const passwordClover = ''
+export const userClover = 'pvillanueva@grupojaka.com'
+export const passwordClover = '2023@JakaClover'
 export const localesClover = ["CASA SAENZ", "CASA SAENZ BOTANICO", "GREEN EAT (Abasto) - Crepe 22 SA", "GREEN EAT (BILG) - Crepe 22 SA", "GREEN EAT (Cabildo)", "GREEN EAT (Dot)", "GREEN EAT (Florida)", "GREEN EAT (PUEG y AB1G)", "GREEN EAT (Rivadavia)", "GREEN EAT (SFEG y BILG)", "Green Eat (Unicenter)", "TEA CONNECTION (Arenales)", "TEA CONNECTION (Conde)", "TEA CONNECTION (Formosa)", "TEA CONNECTION (Lacroze Chai Tea)", "TEA CONNECTION (Montevideo)", "TEA CONNECTION (Paunero)", "TEA CONNECTION (Scalabrini)", "TEA CONNECTION (Sinclair)", "TEA CONNECTION (Unicenter)", "TEA CONNECTION (Uriburu)", "TEA CONNECTION (Vuelta)", "TEA CONNECTION NORDELTA"]
 export const carpetaDestinoClover = join(__dirname, 'Carpeta Destino', 'Clover - Ventas Tarjetas');
 
 // VIRAL
-export const userViral = ''
-export const passwordViral = ''
+export const userViral = 'Administracion'
+export const passwordViral = 'Administracion2233'
 export const carpetaDestinoViralTeaConnection = join(__dirname,  'Carpeta Destino', 'Descargas Viral Vouchers', 'Tea Connection' )
 export const carpetaDestinoViralGreenEat = join(__dirname,  'Carpeta Destino', 'Descargas Viral Vouchers', 'Green Eat' )
 

@@ -15,24 +15,25 @@ let fechaInicio = fechaInicioPeYA
 let fechaFinal =  fechaFinalPeYA 
 /* import {moverArchivoYCambioNombre} from './funcionesReutilizables.mjs' */
 
-const diaInicio = fechaInicio.slice(0, 2);    
-const mesInicio = fechaInicio.slice(2, 4);    
-const anioInicio = fechaInicio.slice(4,8);     
-const anioIncicio1 = fechaInicio.slice(4,5);     
-const anioIncicio2 = fechaInicio.slice(5,6); 
-const anioIncicio3 = fechaInicio.slice(6,7);
-const anioIncicio4 = fechaInicio.slice(7,8);           
-const diaFinal = fechaFinal.slice(0, 2);    
-const mesFinal = fechaFinal.slice(2, 4);    
-const anioFinal = fechaFinal.slice(4,8);
-const anioFinal1 = fechaInicio.slice(4,5);     
-const anioFinal2 = fechaInicio.slice(5,6); 
-const anioFinal3 = fechaInicio.slice(6,7);
-const anioFinal4 = fechaInicio.slice(7,8); 
+let diaInicio = fechaInicio.slice(0, 2);    
+let mesInicio = fechaInicio.slice(2, 4);    
+let anioInicio = fechaInicio.slice(4,8);     
+let anioIncicio1 = fechaInicio.slice(4,5);     
+let anioIncicio2 = fechaInicio.slice(5,6); 
+let anioIncicio3 = fechaInicio.slice(6,7);
+let anioIncicio4 = fechaInicio.slice(7,8);           
+let diaFinal = fechaFinal.slice(0, 2);    
+let mesFinal = fechaFinal.slice(2, 4);    
+let anioFinal = fechaFinal.slice(4,8);
+let anioFinal1 = fechaFinal.slice(4,5);     
+let anioFinal2 = fechaFinal.slice(5,6); 
+let anioFinal3 = fechaFinal.slice(6,7);
+let anioFinal4 = fechaFinal.slice(7,8); 
+
 
 const startTime = performance.now(); // conteo de tiempo del proceso
 const browser = await puppeteer.launch({ 
-    headless: 'new',
+    headless: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   defaultViewport: null,
   ignoreHTTPSErrors: true,
@@ -41,22 +42,6 @@ const browser = await puppeteer.launch({
     });
 const page = await browser.newPage() //creamos nueva pagina en el navegador
 
-
-// Función para restar una semana a las fechas
-const restarSemana = () => {
-  // Formato de fecha actual: DDMMYYYY
-  const formatoFecha = 'DDMMYYYY';
-
-  // Convertir las fechas a objetos moment
-  let momentFechaInicio = moment(fechaInicio, formatoFecha);
-  let momentFechaFinal = moment(fechaFinal, formatoFecha);
-  // Restar una semana a ambas fechas
-  momentFechaInicio = momentFechaInicio.subtract(1, 'weeks');
-  momentFechaFinal = momentFechaFinal.subtract(1, 'weeks');
-  // Actualizar las variables globales
-  fechaInicio = momentFechaInicio.format(formatoFecha);
-  fechaFinal = momentFechaFinal.format(formatoFecha);
-};
 
 
 // FUNCION PARA CAPTURAR ERROR Y REINTENTAR EN CASO DE NO ENCONTRAR SELECTOR
@@ -82,7 +67,6 @@ const waitForSelectorReintentos = async (page, selector, intentosMax = 3) => {
       console.log('Refrescando pagina')
       throw new Error(`Selector "${selector}" no encontrado después de ${i} intentos.`);
   }
-
   
 const iniciarSesion = async () => {
     console.log(`Proceso descarga reportes PeYA Incializado.`)
@@ -117,7 +101,6 @@ const seleccionarLocales = async (local) => {
        await page.waitForTimeout(1000)
     }
 
-
 const seleccionParametrosFecha = async () => {
     try {
         console.log('Seleccionando Parametros de Fecha')
@@ -131,11 +114,12 @@ const seleccionParametrosFecha = async () => {
             }        
             return
         });  
-        await page.waitForTimeout(1000)
+        await page.waitForTimeout(4000)
       
        await waitForSelectorReintentos(page, 'path[d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"]')
+       await page.waitForTimeout(2000)
        await page.click('path[d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"]')
-       await page.waitForTimeout(4000)
+       await page.waitForTimeout(2000)
        await page.waitForFunction(() => { // LUEGO INTENTA 2do BLOQUE DE CODIGO
             console.log('entramos al wait del input')
             let ps = Array.from(document.querySelectorAll('input'));
@@ -146,57 +130,56 @@ const seleccionParametrosFecha = async () => {
         
         await page.keyboard.type(fechaInicio);
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press(anioIncicio1)
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press(anioIncicio2)
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press(anioIncicio3)
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press(anioIncicio4)
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
         await page.keyboard.press('Tab')
-        await page.waitForTimeout(100)
-        await page.keyboard.type(fechaFinal);
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
-        await page.keyboard.press(anioFinal1)
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
-        await page.keyboard.press(anioFinal2)
-        await page.waitForTimeout(100)
-        await page.keyboard.press(anioFinal3)
-        await page.waitForTimeout(100)
-        await page.keyboard.press('ArrowLeft')
-        await page.waitForTimeout(100)
+        await page.waitForTimeout(500)
+        await page.keyboard.type(diaFinal);
+        await page.waitForTimeout(500)
+        await page.keyboard.type(mesFinal);
+        await page.waitForTimeout(500)
         await page.keyboard.press(anioFinal4)
-        await page.waitForTimeout(1000)
+        await page.waitForTimeout(500)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForTimeout(500)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForTimeout(500)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForTimeout(500)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForTimeout(500)
+        await page.keyboard.press(anioFinal1)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForTimeout(500)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForTimeout(500)
+        await page.keyboard.press(anioFinal3)
+        await page.waitForTimeout(500)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForTimeout(500)
+        await page.keyboard.press(anioFinal4)
+        await page.waitForTimeout(500)
         console.log('Seleccion de fechas completado')
         await page.keyboard.press('Tab')
         await page.keyboard.press('Space')
@@ -477,19 +460,69 @@ const consolidarArchivosPeYA = async () => {
   }
  
 
+
+/*   await page.type('input[id="login-email-field"]', userPeYA) */
+
 (async () => {
 await iniciarSesion()
 for (const local of localesPeYA) {
   console.log(`Sociedad ${local} seleccionada`)
-  if(local === "Gastronomica San Joaquin SA" || local === "OMAKASE SA" || local === "PICHIN LIGHT" || local === "THELONIOUS MONK S.A." ) {
-     restarSemana()
-    }
+
       while(true) {
         try {
             await seleccionarLocales(local)
+            fechaInicio = fechaInicioPeYA //reset parametros de fecha
+            fechaFinal =  fechaFinalPeYA  //reset parametros de fecha
+            if(local === "Gastronomica San Joaquin SA" || local === "THELONIOUS MONK S.A." || local === "OMAKASE SA" || local ===  "PICHIN LIGHT" ) {
+              console.log(fechaInicio) 
+              console.log(fechaFinal) 
+              fechaInicio = moment(fechaInicio, 'DDMMYYYY');
+              fechaFinal = moment(fechaFinal, 'DDMMYYYY');
+              fechaInicio = fechaInicio.subtract(1, 'weeks');
+              fechaFinal = fechaFinal.subtract(1, 'weeks');
+              console.log(fechaInicio) 
+              console.log(fechaFinal) 
+              fechaInicio = fechaInicio.format('DDMMYYYY');
+              fechaFinal = fechaFinal.format('DDMMYYYY');
+              console.log(fechaInicio) 
+              console.log(fechaFinal) 
+              diaInicio = fechaInicio.slice(0, 2);    
+              mesInicio = fechaInicio.slice(2, 4);    
+              anioInicio = fechaInicio.slice(4,8);     
+              anioIncicio1 = fechaInicio.slice(4,5);     
+              anioIncicio2 = fechaInicio.slice(5,6); 
+              anioIncicio3 = fechaInicio.slice(6,7);
+              anioIncicio4 = fechaInicio.slice(7,8);           
+              diaFinal = fechaFinal.slice(0, 2);    
+              mesFinal = fechaFinal.slice(2, 4);    
+              anioFinal = fechaFinal.slice(4,8);
+              anioFinal1 = fechaFinal.slice(4,5);     
+              anioFinal2 = fechaFinal.slice(5,6); 
+              anioFinal3 = fechaFinal.slice(6,7);
+              anioFinal4 = fechaFinal.slice(7,8); 
+            }else {
+              fechaInicio = fechaInicioPeYA
+              fechaFinal =  fechaFinalPeYA  
+              diaInicio = fechaInicio.slice(0, 2);    
+              mesInicio = fechaInicio.slice(2, 4);    
+              anioInicio = fechaInicio.slice(4,8);     
+              anioIncicio1 = fechaInicio.slice(4,5);     
+              anioIncicio2 = fechaInicio.slice(5,6); 
+              anioIncicio3 = fechaInicio.slice(6,7);
+              anioIncicio4 = fechaInicio.slice(7,8);           
+              diaFinal = fechaFinal.slice(0, 2);    
+              mesFinal = fechaFinal.slice(2, 4);    
+              anioFinal = fechaFinal.slice(4,8);
+              anioFinal1 = fechaFinal.slice(4,5);     
+              anioFinal2 = fechaFinal.slice(5,6); 
+              anioFinal3 = fechaFinal.slice(6,7);
+              anioFinal4 = fechaFinal.slice(7,8); 
+            }
+
             await seleccionParametrosFecha()
             await descargaArchivos()
             await moverArchivoYCambioNombre(local, 'PeYA', carpetaDestinoPeYA)
+          
             await page.goto('https://pedidosya.portal.restaurant/finance-py')
             break
         }catch(error) {
@@ -500,6 +533,8 @@ for (const local of localesPeYA) {
     }
     fechaInicio = fechaInicioPeYA
     fechaFinal = fechaFinalPeYA
+
+
   
 }
  // Eliminar la carpeta "output"
