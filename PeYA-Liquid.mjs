@@ -474,18 +474,13 @@ for (const local of localesPeYA) {
             fechaInicio = fechaInicioPeYA //reset parametros de fecha
             fechaFinal =  fechaFinalPeYA  //reset parametros de fecha
             if(local === "Gastronomica San Joaquin SA" || local === "THELONIOUS MONK S.A." || local === "OMAKASE SA" || local ===  "PICHIN LIGHT" ) {
-              console.log(fechaInicio) 
-              console.log(fechaFinal) 
+
               fechaInicio = moment(fechaInicio, 'DDMMYYYY');
               fechaFinal = moment(fechaFinal, 'DDMMYYYY');
               fechaInicio = fechaInicio.subtract(1, 'weeks');
               fechaFinal = fechaFinal.subtract(1, 'weeks');
-              console.log(fechaInicio) 
-              console.log(fechaFinal) 
               fechaInicio = fechaInicio.format('DDMMYYYY');
               fechaFinal = fechaFinal.format('DDMMYYYY');
-              console.log(fechaInicio) 
-              console.log(fechaFinal) 
               diaInicio = fechaInicio.slice(0, 2);    
               mesInicio = fechaInicio.slice(2, 4);    
               anioInicio = fechaInicio.slice(4,8);     
